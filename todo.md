@@ -1,5 +1,4 @@
 Basic UI
-  Basic Sidepanel Layout
   Group Add
   Invite People To Group
   Leave Group

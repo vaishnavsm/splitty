@@ -1,15 +1,54 @@
 "use client";
 import React from "react";
 
-const GroupEl: React.FC<{}> = () => {
-  return <div></div>;
+const InviteSearch: React.FC<{}> = () => {
+  return (
+    <div className="flex flex-col flex-1">
+      <label htmlFor="invite-search-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Invite Members
+      </label>
+      <input
+        type="text"
+        id="invite-search-input"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      />
+    </div>
+  );
+};
+
+const GroupEl: React.FC<{ isOpen?: boolean }> = ({ isOpen = false }) => {
+  const confirmLeave = React.useCallback(() => {
+    const result = confirm("Press OK and you'll leave the group 😢");
+    if (result) {
+      alert("TODO leave group");
+    }
+  }, []);
+
+  if (!isOpen) {
+    return <div className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 hover:cursor-pointer">Group Name</div>;
+  }
+
+  // Open, show extra actions
+  return (
+    <div className="bg-gray-50 rounded-lg flex-col gap-2">
+      <h1 className="p-4 pb-2 rounded-lg hover:bg-gray-100 hover:cursor-pointer flex ">Group Name</h1>
+      <div className="py-2 px-4 flex flex-row ">
+        <button className="py-1 px-2 bg-red-100 hover:bg-red-200 rounded-lg" onClick={confirmLeave}>
+          Leave
+        </button>
+      </div>
+      <div className="flex py-2 px-4">
+        <InviteSearch />
+      </div>
+    </div>
+  );
 };
 
 const GroupList: React.FC<{}> = () => {
   return (
     <div className="flex flex-col flex-1 justify-start gap-2">
       <GroupEl />
-      <GroupEl />
+      <GroupEl isOpen />
       <GroupEl />
     </div>
   );
@@ -19,13 +58,13 @@ const GroupCreateDialog: React.FC<{ inputRef: React.Ref<HTMLInputElement> }> = (
   return (
     <div className="px-4 pt-6 pb-4">
       <div className="">
-        <label htmlFor="default-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label htmlFor="group-create" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Group Name
         </label>
         <input
           ref={inputRef}
           type="text"
-          id="default-input"
+          id="group-create"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>

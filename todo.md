@@ -1,6 +1,4 @@
 Basic UI
-  Invite People To Group
-  Leave Group
   Expenses
   Expense Summary
 
